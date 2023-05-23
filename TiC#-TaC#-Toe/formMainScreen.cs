@@ -6,39 +6,50 @@ using System.Windows.Forms;
 
 namespace TiC__TaC__Toe
 {
-    public partial class Form1 : Form
+    public partial class formMainScreen : Form
     {
-        string playerOne;
-        string playerTwo;
-        string currentPlayer;
-        char playerOneSymbol;
-        char playerTwoSymbol;
-        Color playerOneColor = Color.Red;
-        Color playerTwoColor = Color.Blue;
+        public string playerOne;
+        public string playerTwo;
+        public string currentPlayer;
+        public char playerOneSymbol;
+        public char playerTwoSymbol;
+        public Color playerOneColor = Color.Red;
+        public Color playerTwoColor = Color.Blue;
         private List<char> playerOneSquares = null;
         private List<char> playerTwoSquares = null;
-        public Form1()
+        
+        public formMainScreen()
         {
             InitializeComponent();
+            
             Start();
         }
 
         private void Start()
         {
-            playerOne = "Speler 1";
-            playerTwo = "Speler 2";
-            currentPlayer = "Speler 1";
-            playerOneSymbol = 'O';
-            playerTwoSymbol = 'X';
-
-            lblSymbol1.Text = playerOneSymbol.ToString();
-            lblSymbol2.Text = playerTwoSymbol.ToString();
-
-            lblPlayerOne.Text = playerOne;
-            lblPlayerTwo.Text = playerTwo;
+            startScreen startScreen = new startScreen(this);
+            startScreen.Location = tableLayoutPanel1.Location;
+            Controls.Add(startScreen);
+            startScreen.BringToFront();
 
             playerOneSquares = new List<char>();
             playerTwoSquares = new List<char>();
+        }
+
+        public void UpdateLabels()
+        {
+            lblSymbol1.Text = playerOneSymbol.ToString();
+            lblSymbol1.ForeColor = playerOneColor;
+            lblSymbol2.Text = playerTwoSymbol.ToString();
+            lblSymbol2.ForeColor = playerTwoColor;
+
+            lblPlayerOne.Text = playerOne;
+            lblPlayerOne.ForeColor = playerOneColor;
+            lblPlayerTwo.Text = playerTwo;
+            lblPlayerTwo.ForeColor = playerTwoColor;
+
+            lblScore1.ForeColor = playerOneColor;
+            lblScoreTwo.ForeColor = playerTwoColor;
         }
 
         private void btnRestart_Click(object sender, EventArgs e)
@@ -87,15 +98,27 @@ namespace TiC__TaC__Toe
 
             if (playerOneSquares.Count() > 2)
                 if (GetVictory(playerOneSquares))
-                    DoVictory(playerOne);
+                    DoVictory(playerOne, playerOneColor);
             if (playerTwoSquares.Count() > 2)
                 if (GetVictory(playerTwoSquares))
-                    DoVictory(playerTwo);
+                    DoVictory(playerTwo, playerTwoColor);
+
+            int i = 0;
+            foreach (Label item in tableLayoutPanel1.Controls)
+            {
+                if (item.ForeColor == item.BackColor)
+                    i++;
+            }
+            if (i == 0)
+                DoVictory("draw", Color.Black);
         }
 
-        private void DoVictory(string player)
+        private void DoVictory(string player, Color color)
         {
-            Close();
+            ucVictoryScreen victoryScreen = new ucVictoryScreen(player, color, this);
+            Controls.Add(victoryScreen);
+            victoryScreen.Location = tableLayoutPanel1.Location;
+            victoryScreen.BringToFront();
         }
 
         private bool GetVictory(List<char> squares)
