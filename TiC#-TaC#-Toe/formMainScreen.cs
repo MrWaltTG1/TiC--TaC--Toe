@@ -8,27 +8,27 @@ namespace TiC__TaC__Toe
 {
     public partial class formMainScreen : Form
     {
-        public string playerOne;
-        public string playerTwo;
-        public string currentPlayer;
-        public char playerOneSymbol;
-        public char playerTwoSymbol;
-        public Color playerOneColor = Color.Red;
-        public Color playerTwoColor = Color.Blue;
+        public Player PlayerOne = new Player('O', Color.Red, "Player 1");
+        public Player PlayerTwo = new Player('X', Color.Blue, "Player 2");
+        public Player PlayerDraw = new Player('~', Color.Black, "Draw");
+        public Player CurrentPlayer;
         private List<char> playerOneSquares = null;
         private List<char> playerTwoSquares = null;
-        
+        private ucRestartPrompt popup;
+        public ucStartScreen startScreen;
+
+
         public formMainScreen()
         {
             InitializeComponent();
-            
+            startScreen = new ucStartScreen(this);
+            startScreen.Location = tableLayoutPanel1.Location;
+            popup = new ucRestartPrompt(this);
             Start();
         }
 
-        private void Start()
+        public void Start()
         {
-            startScreen startScreen = new startScreen(this);
-            startScreen.Location = tableLayoutPanel1.Location;
             Controls.Add(startScreen);
             startScreen.BringToFront();
 
@@ -38,29 +38,55 @@ namespace TiC__TaC__Toe
 
         public void UpdateLabels()
         {
-            lblSymbol1.Text = playerOneSymbol.ToString();
-            lblSymbol1.ForeColor = playerOneColor;
-            lblSymbol2.Text = playerTwoSymbol.ToString();
-            lblSymbol2.ForeColor = playerTwoColor;
+            lblSymbol1.Text = PlayerOne.symbol.ToString();
+            lblSymbol1.ForeColor = PlayerOne.color;
+            lblSymbol2.Text = PlayerTwo.symbol.ToString();
+            lblSymbol2.ForeColor = PlayerTwo.color;
 
-            lblPlayerOne.Text = playerOne;
-            lblPlayerOne.ForeColor = playerOneColor;
-            lblPlayerTwo.Text = playerTwo;
-            lblPlayerTwo.ForeColor = playerTwoColor;
+            lblPlayerOne.Text = PlayerOne.name;
+            lblPlayerOne.ForeColor = PlayerOne.color;
+            lblPlayerTwo.Text = PlayerTwo.name;
+            lblPlayerTwo.ForeColor = PlayerTwo.color;
 
-            lblScore1.ForeColor = playerOneColor;
-            lblScoreTwo.ForeColor = playerTwoColor;
+            lblScore1.ForeColor = PlayerOne.color;
+            lblScore1.Text = PlayerOne.score.ToString();
+            lblScoreTwo.Text = PlayerTwo.score.ToString();
+            lblScoreTwo.ForeColor = PlayerTwo.color;
+
+            lblNextPlayer.Text = CurrentPlayer.name;
+            lblNextPlayer.ForeColor = CurrentPlayer.color;
         }
 
-        private void btnRestart_Click(object sender, EventArgs e)
+        public void btnRestart_Click(object sender, EventArgs e)
         {
+            bool fieldEmpty = true;
             foreach (Label label in tableLayoutPanel1.Controls)
             {
-                label.ForeColor = label.BackColor;
-                label.Text = "_";
-                playerOneSquares = new List<char>();
-                playerTwoSquares = new List<char>();
+                if (label.ForeColor != label.BackColor)
+                {
+                    label.ForeColor = label.BackColor;
+                    label.Text = "_";
+                    fieldEmpty = false;
+                }
             }
+            playerOneSquares = new List<char>();
+            playerTwoSquares = new List<char>();
+
+            lblNextPlayer.Text = PlayerOne.name;
+            lblNextPlayer.ForeColor = PlayerOne.color;
+
+            CurrentPlayer = PlayerOne;
+
+            if (fieldEmpty)
+                PromptFullRestart();
+        }
+        public void PromptFullRestart()
+        {
+            Controls.Add(popup);
+            popup.BringToFront();
+            popup.Select();
+            popup.Focus();
+            popup.Location = new Point ((Width / 2 - popup.Width / 2), (Height / 2 - popup.Height / 2));
         }
 
         private void Field_Click(object sender, EventArgs e)
@@ -71,21 +97,23 @@ namespace TiC__TaC__Toe
             {
                 if (clickedLabel.ForeColor == clickedLabel.BackColor)
                 {
-                    if (currentPlayer == playerOne)
+                    if (CurrentPlayer == PlayerOne)
                     {
-                        clickedLabel.ForeColor = playerOneColor;
-                        clickedLabel.Text = playerOneSymbol.ToString();
+                        clickedLabel.ForeColor = PlayerOne.color;
+                        clickedLabel.Text = PlayerOne.symbol.ToString();
                         playerOneSquares.Add(clickedLabel.Name[clickedLabel.Name.Count() - 1]);
-                        currentPlayer = playerTwo;
+                        CurrentPlayer = PlayerTwo;
                     }
-                    else if (currentPlayer == playerTwo)
+                    else if (CurrentPlayer == PlayerTwo)
                     {
-                        clickedLabel.ForeColor = playerTwoColor;
-                        clickedLabel.Text = playerTwoSymbol.ToString();
+                        clickedLabel.ForeColor = PlayerTwo.color;
+                        clickedLabel.Text = PlayerTwo.symbol.ToString();
                         playerTwoSquares.Add(clickedLabel.Name[clickedLabel.Name.Count() - 1]);
-                        currentPlayer = playerOne;
+                        CurrentPlayer = PlayerOne;
                     }
                     CheckWin();
+                    lblNextPlayer.Text = CurrentPlayer.name;
+                    lblNextPlayer.ForeColor = CurrentPlayer.color;
                 }
             }
         }
@@ -98,10 +126,18 @@ namespace TiC__TaC__Toe
 
             if (playerOneSquares.Count() > 2)
                 if (GetVictory(playerOneSquares))
-                    DoVictory(playerOne, playerOneColor);
+                {
+                    DoVictory(PlayerOne);
+                    PlayerTwo.ResetWinstreak();
+                    return;
+                }
             if (playerTwoSquares.Count() > 2)
                 if (GetVictory(playerTwoSquares))
-                    DoVictory(playerTwo, playerTwoColor);
+                {
+                    DoVictory(PlayerTwo);
+                    PlayerOne.ResetWinstreak();
+                    return;
+                }
 
             int i = 0;
             foreach (Label item in tableLayoutPanel1.Controls)
@@ -110,15 +146,22 @@ namespace TiC__TaC__Toe
                     i++;
             }
             if (i == 0)
-                DoVictory("draw", Color.Black);
+            {
+                DoVictory(PlayerDraw);
+                PlayerOne.ResetWinstreak();
+                PlayerTwo.ResetWinstreak();
+            }
         }
 
-        private void DoVictory(string player, Color color)
+        private void DoVictory(Player player)
         {
-            ucVictoryScreen victoryScreen = new ucVictoryScreen(player, color, this);
+            ucVictoryScreen victoryScreen = new ucVictoryScreen(this, player);
             Controls.Add(victoryScreen);
             victoryScreen.Location = tableLayoutPanel1.Location;
             victoryScreen.BringToFront();
+            lblNextPlayer.Text = "";
+            lblScore1.Text = PlayerOne.score.ToString();
+            lblScoreTwo.Text = PlayerTwo.score.ToString();
         }
 
         private bool GetVictory(List<char> squares)
@@ -153,6 +196,37 @@ namespace TiC__TaC__Toe
                     return true;
             }
             return false;
+        }
+
+        private void formMainScreen_ControlAdded(object sender, ControlEventArgs e)
+        {
+            btnRestart.Enabled = false;
+            tableLayoutPanel1.Enabled = false;
+            
+        }
+
+        private void formMainScreen_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            btnRestart.Enabled = true;
+            tableLayoutPanel1.Enabled = true;
+        }
+
+        private void formMainScreen_KeyDown(object sender, KeyEventArgs e)
+        {
+            string key = e.KeyCode.ToString();
+            if (key.Contains("NumPad") && tableLayoutPanel1.Enabled == true)
+            {
+                char number = key.Last();
+                foreach (Label field in tableLayoutPanel1.Controls)
+                {
+                    char fieldNumber = field.Name.Last();
+                    if (number == fieldNumber)
+                    {
+                        Field_Click(field, e);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

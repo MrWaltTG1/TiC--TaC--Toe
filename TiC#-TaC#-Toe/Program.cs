@@ -18,5 +18,6 @@ namespace TiC__TaC__Toe
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new formMainScreen());
         }
+        
     }
 }

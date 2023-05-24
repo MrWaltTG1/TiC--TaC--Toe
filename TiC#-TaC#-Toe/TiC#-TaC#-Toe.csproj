@@ -52,8 +52,15 @@
     <Compile Include="formMainScreen.Designer.cs">
       <DependentUpon>formMainScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucRestartPrompt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucRestartPrompt.Designer.cs">
+      <DependentUpon>ucRestartPrompt.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucStartScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -78,6 +85,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ucRestartPrompt.resx">
+      <DependentUpon>ucRestartPrompt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucStartScreen.resx">
       <DependentUpon>ucStartScreen.cs</DependentUpon>
     </EmbeddedResource>

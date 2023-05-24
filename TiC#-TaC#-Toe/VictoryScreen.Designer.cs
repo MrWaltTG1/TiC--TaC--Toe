@@ -32,12 +32,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblWinner = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblScoreOld = new System.Windows.Forms.Label();
             this.lblScoreNew = new System.Windows.Forms.Label();
+            this.lblScoreOld = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.lblWinstreak = new System.Windows.Forms.Label();
+            this.lblWinstreakScore = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,16 +76,6 @@
             this.panel1.Size = new System.Drawing.Size(120, 169);
             this.panel1.TabIndex = 2;
             // 
-            // lblScoreOld
-            // 
-            this.lblScoreOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScoreOld.Location = new System.Drawing.Point(3, -2);
-            this.lblScoreOld.Name = "lblScoreOld";
-            this.lblScoreOld.Size = new System.Drawing.Size(120, 169);
-            this.lblScoreOld.TabIndex = 0;
-            this.lblScoreOld.Text = "0";
-            this.lblScoreOld.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // lblScoreNew
             // 
             this.lblScoreNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -94,13 +86,26 @@
             this.lblScoreNew.Text = "0";
             this.lblScoreNew.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblScoreOld
+            // 
+            this.lblScoreOld.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScoreOld.Location = new System.Drawing.Point(3, -2);
+            this.lblScoreOld.Name = "lblScoreOld";
+            this.lblScoreOld.Size = new System.Drawing.Size(120, 169);
+            this.lblScoreOld.TabIndex = 0;
+            this.lblScoreOld.Text = "0";
+            this.lblScoreOld.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // timer1
             // 
+            this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timer2
             // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 1;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // button1
@@ -125,21 +130,45 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // lblWinstreak
+            // 
+            this.lblWinstreak.AutoSize = true;
+            this.lblWinstreak.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWinstreak.Location = new System.Drawing.Point(155, 348);
+            this.lblWinstreak.Name = "lblWinstreak";
+            this.lblWinstreak.Size = new System.Drawing.Size(84, 20);
+            this.lblWinstreak.TabIndex = 5;
+            this.lblWinstreak.Text = "Winstreak:";
+            this.lblWinstreak.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblWinstreakScore
+            // 
+            this.lblWinstreakScore.AutoSize = true;
+            this.lblWinstreakScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWinstreakScore.Location = new System.Drawing.Point(234, 348);
+            this.lblWinstreakScore.Name = "lblWinstreakScore";
+            this.lblWinstreakScore.Size = new System.Drawing.Size(19, 20);
+            this.lblWinstreakScore.TabIndex = 6;
+            this.lblWinstreakScore.Text = "0";
+            // 
             // ucVictoryScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Controls.Add(this.lblWinstreakScore);
+            this.Controls.Add(this.lblWinstreak);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblWinner);
             this.Controls.Add(this.label1);
             this.Name = "ucVictoryScreen";
-            this.Size = new System.Drawing.Size(456, 456);
+            this.Size = new System.Drawing.Size(460, 460);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -154,5 +183,7 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label lblWinstreak;
+        private System.Windows.Forms.Label lblWinstreakScore;
     }
 }

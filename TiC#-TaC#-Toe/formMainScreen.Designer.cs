@@ -355,7 +355,7 @@
             this.lblField7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblField7.Click += new System.EventHandler(this.Field_Click);
             // 
-            // Form1
+            // formMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -365,8 +365,12 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.lblNextPlayer);
             this.Controls.Add(this.lblNext);
-            this.Name = "Form1";
+            this.KeyPreview = true;
+            this.Name = "formMainScreen";
             this.Text = "TiC# TaC# Toe";
+            this.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.formMainScreen_ControlAdded);
+            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.formMainScreen_ControlRemoved);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.formMainScreen_KeyDown);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);

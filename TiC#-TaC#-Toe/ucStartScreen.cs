@@ -5,10 +5,10 @@ using System.Windows.Forms;
 
 namespace TiC__TaC__Toe
 {
-    public partial class startScreen : UserControl
+    public partial class ucStartScreen : UserControl
     {
         formMainScreen mainScreen;
-        public startScreen(formMainScreen form1)
+        public ucStartScreen(formMainScreen form1)
         {
             InitializeComponent();
             mainScreen = form1;
@@ -186,14 +186,14 @@ namespace TiC__TaC__Toe
 
         private void Confirm_Click(object sender, EventArgs e)
         {
-            mainScreen.playerOne = lblExampleName1.Text;
-            mainScreen.playerOneSymbol = lblExampleSymbol1.Text.ToCharArray()[0];
-            mainScreen.playerOneColor = lblExampleSymbol1.ForeColor;
-            mainScreen.playerTwo = lblExampleName2.Text;
-            mainScreen.playerTwoSymbol = lblExampleSymbol2.Text.ToCharArray()[0];
-            mainScreen.playerTwoColor = lblExampleSymbol2.ForeColor;
+            mainScreen.PlayerOne.name = lblExampleName1.Text;
+            mainScreen.PlayerOne.symbol = lblExampleSymbol1.Text.ToCharArray()[0];
+            mainScreen.PlayerOne.color = lblExampleSymbol1.ForeColor;
+            mainScreen.PlayerTwo.name = lblExampleName2.Text;
+            mainScreen.PlayerTwo.symbol = lblExampleSymbol2.Text.ToCharArray()[0];
+            mainScreen.PlayerTwo.color = lblExampleSymbol2.ForeColor;
+            mainScreen.CurrentPlayer = mainScreen.PlayerOne;
             mainScreen.UpdateLabels();
-            mainScreen.currentPlayer = mainScreen.playerOne;
             Parent.Controls.Remove(this);
         }
     }

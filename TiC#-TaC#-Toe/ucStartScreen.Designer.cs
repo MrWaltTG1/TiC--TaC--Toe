@@ -1,6 +1,6 @@
 ﻿namespace TiC__TaC__Toe
 {
-    partial class startScreen
+    partial class ucStartScreen
     {
         /// <summary> 
         /// Required designer variable.
@@ -99,9 +99,9 @@
             this.flowLayoutPanel1.Controls.Add(this.inputPlayer1);
             this.flowLayoutPanel1.Controls.Add(this.panel1);
             this.flowLayoutPanel1.Controls.Add(this.panel2);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(-2, 24);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(224, 381);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(224, 305);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // lblPlayerOne
@@ -353,9 +353,9 @@
             this.flowLayoutPanel3.Controls.Add(this.inputPlayer2);
             this.flowLayoutPanel3.Controls.Add(this.panel3);
             this.flowLayoutPanel3.Controls.Add(this.panel4);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(234, 24);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(232, 24);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(224, 381);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(224, 305);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
             // label1
@@ -603,16 +603,16 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(160, 411);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(6, 335);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 42);
+            this.button1.Size = new System.Drawing.Size(450, 118);
             this.button1.TabIndex = 2;
             this.button1.Text = "Confirm";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Confirm_Click);
             // 
-            // startScreen
+            // ucStartScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -621,8 +621,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Name = "startScreen";
-            this.Size = new System.Drawing.Size(456, 456);
+            this.Name = "ucStartScreen";
+            this.Size = new System.Drawing.Size(460, 460);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
