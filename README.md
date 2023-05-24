@@ -1,15 +1,15 @@
 # TiC#-TaC#-Toe
 
-<p align="center">A Kivy application to decrypt morsecode from audio files</p>
+<p align="center">A C# Windows Forms app to play Tic-Tac-Toe.</p>
 
 ## Description
 
-Demorsifier is an application that allows users to translate audiofiles including morsecode to text. It also includes our previous project 'Morsifier'.
+A small application to play tic-tac-toe against another player on the same device. Includes multiple colors and symbols to choose from.
 
 
 ## Getting Started
 
-### Dependencies
+Download the e
 
 ## Usage
 
