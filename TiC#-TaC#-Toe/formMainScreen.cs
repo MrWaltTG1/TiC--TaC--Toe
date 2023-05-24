@@ -86,7 +86,7 @@ namespace TiC__TaC__Toe
             popup.BringToFront();
             popup.Select();
             popup.Focus();
-            popup.Location = new Point ((Width / 2 - popup.Width / 2), (Height / 2 - popup.Height / 2));
+            popup.Location = new Point((Width / 2 - popup.Width / 2), (Height / 2 - popup.Height / 2));
         }
 
         private void Field_Click(object sender, EventArgs e)
@@ -202,7 +202,7 @@ namespace TiC__TaC__Toe
         {
             btnRestart.Enabled = false;
             tableLayoutPanel1.Enabled = false;
-            
+
         }
 
         private void formMainScreen_ControlRemoved(object sender, ControlEventArgs e)
