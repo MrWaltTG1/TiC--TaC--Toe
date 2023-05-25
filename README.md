@@ -9,7 +9,7 @@ A small application to play tic-tac-toe against another player on the same devic
 
 ## Getting Started
 
-Download the e
+Download from the exe branch and run the TiC#-TaC#-Toe.exe file.
 
 ## Usage
 
