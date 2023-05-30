@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblNext = new System.Windows.Forms.Label();
             this.lblNextPlayer = new System.Windows.Forms.Label();
             this.btnRestart = new System.Windows.Forms.Button();
@@ -51,6 +52,7 @@
             this.lblField9 = new System.Windows.Forms.Label();
             this.lblField8 = new System.Windows.Forms.Label();
             this.lblField7 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -355,6 +357,11 @@
             this.lblField7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblField7.Click += new System.EventHandler(this.Field_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 600;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // formMainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,6 +413,7 @@
         private System.Windows.Forms.Label lblField9;
         private System.Windows.Forms.Label lblField8;
         private System.Windows.Forms.Label lblField7;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

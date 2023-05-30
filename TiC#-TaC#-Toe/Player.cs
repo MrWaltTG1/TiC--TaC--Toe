@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TiC__TaC__Toe
 {
@@ -15,6 +10,8 @@ namespace TiC__TaC__Toe
         public int score = 0;
         public char symbol;
         public int winstreak = 0;
+        private Random random = new Random();
+        public int CPU = 0;
         public Player(char symbol, Color color, string name)
         {
             this.symbol = symbol;
@@ -34,6 +31,37 @@ namespace TiC__TaC__Toe
         public void ResetWinstreak()
         {
             winstreak = 0;
+        }
+
+        public void ToggleCPU(string difficulty = "off")
+        {
+            if (difficulty == "Normal")
+                CPU = 1;
+            else if (difficulty == "Hard")
+                CPU = 2;
+            else
+                CPU = 0;
+        }
+
+        public char ChooseNextMove()
+        {
+            if (CPU == 1)
+                return ChooseNextMoveNormal();
+            else if (CPU == 2)
+                return ChooseNextMoveHard();
+            else
+                return ' ';
+        }
+
+        private char ChooseNextMoveNormal()
+        {
+            char nextField = (char)(random.Next(1, 9) + '0');
+            return nextField;
+        }
+
+        private char ChooseNextMoveHard()
+        {
+            return '~';
         }
     }
 }

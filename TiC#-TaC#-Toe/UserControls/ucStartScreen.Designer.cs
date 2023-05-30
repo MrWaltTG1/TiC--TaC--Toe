@@ -70,7 +70,11 @@
             this.btnOrange2 = new System.Windows.Forms.PictureBox();
             this.btnBlue2 = new System.Windows.Forms.PictureBox();
             this.btnRed2 = new System.Windows.Forms.PictureBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkTwo = new System.Windows.Forms.CheckBox();
+            this.checkOne = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -128,6 +132,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.checkOne);
             this.panel1.Controls.Add(this.lblExampleName1);
             this.panel1.Controls.Add(this.lblExampleSymbol1);
             this.panel1.Location = new System.Drawing.Point(3, 61);
@@ -353,6 +358,8 @@
             this.flowLayoutPanel3.Controls.Add(this.inputPlayer2);
             this.flowLayoutPanel3.Controls.Add(this.panel3);
             this.flowLayoutPanel3.Controls.Add(this.panel4);
+            this.flowLayoutPanel3.Controls.Add(this.checkBox1);
+            this.flowLayoutPanel3.Controls.Add(this.checkBox2);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(232, 24);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(224, 305);
@@ -382,6 +389,7 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.checkTwo);
             this.panel3.Controls.Add(this.lblExampleName2);
             this.panel3.Controls.Add(this.lblExampleSymbol2);
             this.panel3.Location = new System.Drawing.Point(3, 61);
@@ -601,6 +609,26 @@
             this.btnRed2.TabStop = false;
             this.btnRed2.Click += new System.EventHandler(this.ColorButton2_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 311);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(89, 311);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(80, 17);
+            this.checkBox2.TabIndex = 6;
+            this.checkBox2.Text = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -611,6 +639,30 @@
             this.button1.Text = "Confirm";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Confirm_Click);
+            // 
+            // checkTwo
+            // 
+            this.checkTwo.AutoSize = true;
+            this.checkTwo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkTwo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.checkTwo.Location = new System.Drawing.Point(165, 6);
+            this.checkTwo.Name = "checkTwo";
+            this.checkTwo.Size = new System.Drawing.Size(48, 17);
+            this.checkTwo.TabIndex = 7;
+            this.checkTwo.Text = "CPU";
+            this.checkTwo.UseVisualStyleBackColor = true;
+            // 
+            // checkOne
+            // 
+            this.checkOne.AutoSize = true;
+            this.checkOne.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkOne.Cursor = System.Windows.Forms.Cursors.Default;
+            this.checkOne.Location = new System.Drawing.Point(165, 6);
+            this.checkOne.Name = "checkOne";
+            this.checkOne.Size = new System.Drawing.Size(48, 17);
+            this.checkOne.TabIndex = 8;
+            this.checkOne.Text = "CPU";
+            this.checkOne.UseVisualStyleBackColor = true;
             // 
             // ucStartScreen
             // 
@@ -626,6 +678,7 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnCyan1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPink1)).EndInit();
@@ -637,6 +690,7 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnCyan2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPink2)).EndInit();
@@ -694,5 +748,9 @@
         private System.Windows.Forms.PictureBox btnBlue2;
         private System.Windows.Forms.PictureBox btnRed2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkTwo;
+        private System.Windows.Forms.CheckBox checkOne;
     }
 }

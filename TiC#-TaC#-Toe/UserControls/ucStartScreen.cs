@@ -8,6 +8,7 @@ namespace TiC__TaC__Toe
     public partial class ucStartScreen : UserControl
     {
         formMainScreen mainScreen;
+        Random random = new Random();
         public ucStartScreen(formMainScreen form1)
         {
             InitializeComponent();
@@ -186,15 +187,23 @@ namespace TiC__TaC__Toe
 
         private void Confirm_Click(object sender, EventArgs e)
         {
+            if (checkOne.Checked)
+                mainScreen.PlayerOne.ToggleCPU("Normal");
             mainScreen.PlayerOne.name = lblExampleName1.Text;
             mainScreen.PlayerOne.symbol = lblExampleSymbol1.Text.ToCharArray()[0];
             mainScreen.PlayerOne.color = lblExampleSymbol1.ForeColor;
+
+            if (checkTwo.Checked)
+                mainScreen.PlayerTwo.ToggleCPU("Normal");
             mainScreen.PlayerTwo.name = lblExampleName2.Text;
             mainScreen.PlayerTwo.symbol = lblExampleSymbol2.Text.ToCharArray()[0];
             mainScreen.PlayerTwo.color = lblExampleSymbol2.ForeColor;
-            mainScreen.CurrentPlayer = mainScreen.PlayerOne;
+
+            mainScreen.CurrentPlayer = null;
+            mainScreen.StartNewRound();
             mainScreen.UpdateLabels();
             Parent.Controls.Remove(this);
+
         }
     }
 }

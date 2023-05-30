@@ -16,7 +16,8 @@ namespace TiC__TaC__Toe
         private List<char> playerTwoSquares = null;
         private ucRestartPrompt popup;
         public ucStartScreen startScreen;
-
+        private Label loadedField;
+        private bool disableClick = false;
 
         public formMainScreen()
         {
@@ -35,6 +36,83 @@ namespace TiC__TaC__Toe
             playerOneSquares = new List<char>();
             playerTwoSquares = new List<char>();
         }
+        public void StartNewRound()
+        {
+            if (CurrentPlayer == PlayerOne)
+                CurrentPlayer = PlayerTwo;
+            else if (CurrentPlayer == PlayerTwo)
+                CurrentPlayer = PlayerOne;
+            else
+                CurrentPlayer = PlayerOne;
+
+            lblNextPlayer.Text = CurrentPlayer.name;
+            lblNextPlayer.ForeColor = CurrentPlayer.color;
+
+            if (CurrentPlayer.CPU > 0)
+            {
+                CPUMove();
+            }
+        }
+
+        private void CPUMove()
+        {
+            timer1.Enabled = true;
+            disableClick = true; ;
+            int attempts = 0;
+            bool success = false;
+            while (success == false)
+            {
+                char fieldChar = CurrentPlayer.ChooseNextMove();
+                if (fieldChar == '~')
+                {
+                    DoHardMove();
+                }
+                else
+                {
+                    Label field = GetField(fieldChar);
+                    if (field.ForeColor == field.BackColor)
+                    {
+                        loadedField = field;
+                        success = true;
+                    }
+                    attempts++;
+                    if (attempts > 30)
+                        success = true;
+                }
+            }
+        }
+
+        private void WaitOnCPUPick()
+        {
+            timer1.Enabled = false;
+            disableClick = false;
+            if (loadedField != null)
+            {
+                Field_Click(loadedField, EventArgs.Empty);
+            }
+        }
+
+        char[] NWE = { '7', '8', '9' };
+        char[] NWSE = { '7', '5', '3' };
+        char[] NWS = { '7', '4', '1' };
+        char[] WE = { '4', '5', '6' };
+        char[] NS = { '2', '5', '8' };
+        char[] SWE = { '1', '2', '3' };
+        char[] SWNE = { '3', '6', '9' };
+        char[] NES = { '9', '6', '3' };
+        
+        private void DoHardMove()
+        {
+            List<char[]> Directions = new List<char[]> { NWE, NWSE, NWS, WE, NS, SWE, SWNE, NES };
+            foreach (char[] direction in Directions)
+            {
+                if (LinqExtras.ContainsAllItems(CurrentPlayer.takenSquares, direction)
+                {
+                    continue;
+                }
+            }
+        }
+        
 
         public void UpdateLabels()
         {
@@ -69,13 +147,11 @@ namespace TiC__TaC__Toe
                     fieldEmpty = false;
                 }
             }
-            playerOneSquares = new List<char>();
-            playerTwoSquares = new List<char>();
+            PlayerOne.takenSquares = new List<char>();
+            PlayerTwo.takenSquares = new List<char>();
 
-            lblNextPlayer.Text = PlayerOne.name;
-            lblNextPlayer.ForeColor = PlayerOne.color;
-
-            CurrentPlayer = PlayerOne;
+            CurrentPlayer = null;
+            StartNewRound();
 
             if (fieldEmpty)
                 PromptFullRestart();
@@ -89,11 +165,11 @@ namespace TiC__TaC__Toe
             popup.Location = new Point((Width / 2 - popup.Width / 2), (Height / 2 - popup.Height / 2));
         }
 
-        private void Field_Click(object sender, EventArgs e)
+        public void Field_Click(object sender, EventArgs e)
         {
             Label clickedLabel = sender as Label;
 
-            if (clickedLabel != null)
+            if (clickedLabel != null && disableClick == false)
             {
                 if (clickedLabel.ForeColor == clickedLabel.BackColor)
                 {
@@ -102,37 +178,46 @@ namespace TiC__TaC__Toe
                         clickedLabel.ForeColor = PlayerOne.color;
                         clickedLabel.Text = PlayerOne.symbol.ToString();
                         playerOneSquares.Add(clickedLabel.Name[clickedLabel.Name.Count() - 1]);
-                        CurrentPlayer = PlayerTwo;
                     }
                     else if (CurrentPlayer == PlayerTwo)
                     {
                         clickedLabel.ForeColor = PlayerTwo.color;
                         clickedLabel.Text = PlayerTwo.symbol.ToString();
                         playerTwoSquares.Add(clickedLabel.Name[clickedLabel.Name.Count() - 1]);
-                        CurrentPlayer = PlayerOne;
                     }
+                    int controlCount = Controls.Count;
                     CheckWin();
-                    lblNextPlayer.Text = CurrentPlayer.name;
-                    lblNextPlayer.ForeColor = CurrentPlayer.color;
+                    if (controlCount == Controls.Count)
+                        StartNewRound();
                 }
             }
         }
 
+        private Label GetField(char fieldChar)
+        {
+            foreach (Label field in tableLayoutPanel1.Controls)
+            {
+                char fieldNumber = field.Name.Last();
+                if (fieldChar == fieldNumber)
+                    return field;
+            }
+            return null;
+        }
 
         private void CheckWin()
         {
-            playerOneSquares.Sort();
-            playerTwoSquares.Sort();
+            PlayerOne.takenSquares.Sort();
+            PlayerTwo.takenSquares.Sort();
 
-            if (playerOneSquares.Count() > 2)
-                if (GetVictory(playerOneSquares))
+            if (PlayerOne.takenSquares.Count() > 2)
+                if (GetVictory(PlayerOne.takenSquares))
                 {
                     DoVictory(PlayerOne);
                     PlayerTwo.ResetWinstreak();
                     return;
                 }
-            if (playerTwoSquares.Count() > 2)
-                if (GetVictory(playerTwoSquares))
+            if (PlayerTwo.takenSquares.Count() > 2)
+                if (GetVictory(PlayerTwo.takenSquares))
                 {
                     DoVictory(PlayerTwo);
                     PlayerOne.ResetWinstreak();
@@ -217,16 +302,22 @@ namespace TiC__TaC__Toe
             if (key.Contains("NumPad") && tableLayoutPanel1.Enabled == true)
             {
                 char number = key.Last();
-                foreach (Label field in tableLayoutPanel1.Controls)
-                {
-                    char fieldNumber = field.Name.Last();
-                    if (number == fieldNumber)
-                    {
-                        Field_Click(field, e);
-                        break;
-                    }
-                }
+                Label field = GetField(number);
+                if (field != null)
+                    Field_Click(field, e);
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            WaitOnCPUPick();
+        }
+    }
+    public static class LinqExtras // Or whatever
+    {
+        public static bool ContainsAllItems<T>(this IEnumerable<T> a, IEnumerable<T> b)
+        {
+            return !b.Except(a).Any();
         }
     }
 }
