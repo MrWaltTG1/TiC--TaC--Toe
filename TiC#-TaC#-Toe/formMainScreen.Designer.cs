@@ -87,7 +87,7 @@
             this.btnRestart.TabIndex = 1;
             this.btnRestart.Text = "Restart";
             this.btnRestart.UseVisualStyleBackColor = true;
-            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
+            this.btnRestart.Click += new System.EventHandler(this.Restart);
             // 
             // flowLayoutPanel1
             // 

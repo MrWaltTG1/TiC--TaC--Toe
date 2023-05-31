@@ -188,13 +188,13 @@ namespace TiC__TaC__Toe
         private void Confirm_Click(object sender, EventArgs e)
         {
             if (checkOne.Checked)
-                mainScreen.PlayerOne.ToggleCPU("Normal");
+                mainScreen.PlayerOne.ToggleCPU("Hard");
             mainScreen.PlayerOne.name = lblExampleName1.Text;
             mainScreen.PlayerOne.symbol = lblExampleSymbol1.Text.ToCharArray()[0];
             mainScreen.PlayerOne.color = lblExampleSymbol1.ForeColor;
 
             if (checkTwo.Checked)
-                mainScreen.PlayerTwo.ToggleCPU("Normal");
+                mainScreen.PlayerTwo.ToggleCPU("Hard");
             mainScreen.PlayerTwo.name = lblExampleName2.Text;
             mainScreen.PlayerTwo.symbol = lblExampleSymbol2.Text.ToCharArray()[0];
             mainScreen.PlayerTwo.color = lblExampleSymbol2.ForeColor;

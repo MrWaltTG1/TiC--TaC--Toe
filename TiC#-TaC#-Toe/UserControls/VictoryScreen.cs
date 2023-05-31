@@ -81,7 +81,7 @@ namespace TiC__TaC__Toe
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MainScreen.btnRestart_Click(sender, e);
+            MainScreen.Restart(sender, e);
             MainScreen.Controls.Remove(this);
         }
     }

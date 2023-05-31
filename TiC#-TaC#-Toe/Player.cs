@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace TiC__TaC__Toe
@@ -12,6 +13,7 @@ namespace TiC__TaC__Toe
         public int winstreak = 0;
         private Random random = new Random();
         public int CPU = 0;
+        public List<char> takenSquares = new List<char> { };
         public Player(char symbol, Color color, string name)
         {
             this.symbol = symbol;
