@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,6 +20,8 @@ namespace TiC__TaC__Toe
         {
             if (inputPlayer1.Text != "")
                 lblExampleName1.Text = inputPlayer1.Text;
+            else if (checkOne.Checked)
+                lblExampleName1.Text = "CPU 1";
             else
                 lblExampleName1.Text = "Player 1";
         }
@@ -27,6 +30,8 @@ namespace TiC__TaC__Toe
         {
             if (inputPlayer2.Text != "")
                 lblExampleName2.Text = inputPlayer2.Text;
+            else if (checkTwo.Checked)
+                lblExampleName2.Text = "CPU 2";
             else
                 lblExampleName2.Text = "Player 2";
         }
@@ -188,13 +193,17 @@ namespace TiC__TaC__Toe
         private void Confirm_Click(object sender, EventArgs e)
         {
             if (checkOne.Checked)
-                mainScreen.PlayerOne.ToggleCPU("Hard");
+                mainScreen.PlayerOne.ToggleCPU("Normal");
+            else
+                mainScreen.PlayerOne.ToggleCPU("off");
             mainScreen.PlayerOne.name = lblExampleName1.Text;
             mainScreen.PlayerOne.symbol = lblExampleSymbol1.Text.ToCharArray()[0];
             mainScreen.PlayerOne.color = lblExampleSymbol1.ForeColor;
 
             if (checkTwo.Checked)
-                mainScreen.PlayerTwo.ToggleCPU("Hard");
+                mainScreen.PlayerTwo.ToggleCPU("Normal");
+            else
+                mainScreen.PlayerTwo.ToggleCPU("off");
             mainScreen.PlayerTwo.name = lblExampleName2.Text;
             mainScreen.PlayerTwo.symbol = lblExampleSymbol2.Text.ToCharArray()[0];
             mainScreen.PlayerTwo.color = lblExampleSymbol2.ForeColor;
@@ -204,6 +213,46 @@ namespace TiC__TaC__Toe
             mainScreen.UpdateLabels();
             Parent.Controls.Remove(this);
 
+        }
+
+        private void checkTwo_CheckedChanged(object sender, EventArgs e)
+        {
+            inputPlayer2_TextChanged(sender, e);
+        }
+
+        private void checkOne_CheckedChanged(object sender, EventArgs e)
+        {
+            inputPlayer1_TextChanged(sender, e);
+        }
+
+        private void btnRandomize1_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+            IEnumerable<Label> symbolList = panel2.Controls.OfType<Label>();
+            int symbolIndex = random.Next(1, symbolList.Count());
+            Label symbol = symbolList.ElementAt(symbolIndex);
+
+            IEnumerable<PictureBox> colorList = panel2.Controls.OfType<PictureBox>();
+            int colorIndex = random.Next(1, colorList.Count());
+            PictureBox color = colorList.ElementAt(colorIndex);
+
+            ColorButton1_Click(color, e);
+            SymbolButton1_Click(symbol, e);
+        }
+
+        private void btnRandomize2_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+            IEnumerable<Label> symbolList = panel4.Controls.OfType<Label>();
+            int symbolIndex = random.Next(1, symbolList.Count());
+            Label symbol = symbolList.ElementAt(symbolIndex);
+
+            IEnumerable<PictureBox> colorList = panel4.Controls.OfType<PictureBox>();
+            int colorIndex = random.Next(1, colorList.Count());
+            PictureBox color = colorList.ElementAt(colorIndex);
+
+            ColorButton2_Click(color, e);
+            SymbolButton2_Click(symbol, e);
         }
     }
 }

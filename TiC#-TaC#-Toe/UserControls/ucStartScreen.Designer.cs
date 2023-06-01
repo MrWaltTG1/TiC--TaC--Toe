@@ -32,6 +32,7 @@
             this.lblPlayerOne = new System.Windows.Forms.Label();
             this.inputPlayer1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkOne = new System.Windows.Forms.CheckBox();
             this.lblExampleName1 = new System.Windows.Forms.Label();
             this.lblExampleSymbol1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -53,6 +54,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.inputPlayer2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.checkTwo = new System.Windows.Forms.CheckBox();
             this.lblExampleName2 = new System.Windows.Forms.Label();
             this.lblExampleSymbol2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -73,8 +75,8 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.checkTwo = new System.Windows.Forms.CheckBox();
-            this.checkOne = new System.Windows.Forms.CheckBox();
+            this.btnRandomize2 = new System.Windows.Forms.Button();
+            this.btnRandomize1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -132,6 +134,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btnRandomize1);
             this.panel1.Controls.Add(this.checkOne);
             this.panel1.Controls.Add(this.lblExampleName1);
             this.panel1.Controls.Add(this.lblExampleSymbol1);
@@ -139,6 +142,19 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(221, 172);
             this.panel1.TabIndex = 2;
+            // 
+            // checkOne
+            // 
+            this.checkOne.AutoSize = true;
+            this.checkOne.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkOne.Cursor = System.Windows.Forms.Cursors.Default;
+            this.checkOne.Location = new System.Drawing.Point(165, 6);
+            this.checkOne.Name = "checkOne";
+            this.checkOne.Size = new System.Drawing.Size(48, 17);
+            this.checkOne.TabIndex = 8;
+            this.checkOne.Text = "CPU";
+            this.checkOne.UseVisualStyleBackColor = true;
+            this.checkOne.CheckedChanged += new System.EventHandler(this.checkOne_CheckedChanged);
             // 
             // lblExampleName1
             // 
@@ -389,6 +405,7 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.btnRandomize2);
             this.panel3.Controls.Add(this.checkTwo);
             this.panel3.Controls.Add(this.lblExampleName2);
             this.panel3.Controls.Add(this.lblExampleSymbol2);
@@ -396,6 +413,19 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(221, 172);
             this.panel3.TabIndex = 2;
+            // 
+            // checkTwo
+            // 
+            this.checkTwo.AutoSize = true;
+            this.checkTwo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkTwo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.checkTwo.Location = new System.Drawing.Point(165, 6);
+            this.checkTwo.Name = "checkTwo";
+            this.checkTwo.Size = new System.Drawing.Size(48, 17);
+            this.checkTwo.TabIndex = 7;
+            this.checkTwo.Text = "CPU";
+            this.checkTwo.UseVisualStyleBackColor = true;
+            this.checkTwo.CheckedChanged += new System.EventHandler(this.checkTwo_CheckedChanged);
             // 
             // lblExampleName2
             // 
@@ -640,29 +670,27 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Confirm_Click);
             // 
-            // checkTwo
+            // btnRandomize2
             // 
-            this.checkTwo.AutoSize = true;
-            this.checkTwo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkTwo.Cursor = System.Windows.Forms.Cursors.Default;
-            this.checkTwo.Location = new System.Drawing.Point(165, 6);
-            this.checkTwo.Name = "checkTwo";
-            this.checkTwo.Size = new System.Drawing.Size(48, 17);
-            this.checkTwo.TabIndex = 7;
-            this.checkTwo.Text = "CPU";
-            this.checkTwo.UseVisualStyleBackColor = true;
+            this.btnRandomize2.Location = new System.Drawing.Point(189, 140);
+            this.btnRandomize2.Name = "btnRandomize2";
+            this.btnRandomize2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnRandomize2.Size = new System.Drawing.Size(25, 25);
+            this.btnRandomize2.TabIndex = 8;
+            this.btnRandomize2.Text = "R";
+            this.btnRandomize2.UseVisualStyleBackColor = true;
+            this.btnRandomize2.Click += new System.EventHandler(this.btnRandomize2_Click);
             // 
-            // checkOne
+            // btnRandomize1
             // 
-            this.checkOne.AutoSize = true;
-            this.checkOne.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkOne.Cursor = System.Windows.Forms.Cursors.Default;
-            this.checkOne.Location = new System.Drawing.Point(165, 6);
-            this.checkOne.Name = "checkOne";
-            this.checkOne.Size = new System.Drawing.Size(48, 17);
-            this.checkOne.TabIndex = 8;
-            this.checkOne.Text = "CPU";
-            this.checkOne.UseVisualStyleBackColor = true;
+            this.btnRandomize1.Location = new System.Drawing.Point(188, 140);
+            this.btnRandomize1.Name = "btnRandomize1";
+            this.btnRandomize1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnRandomize1.Size = new System.Drawing.Size(25, 25);
+            this.btnRandomize1.TabIndex = 8;
+            this.btnRandomize1.Text = "R";
+            this.btnRandomize1.UseVisualStyleBackColor = true;
+            this.btnRandomize1.Click += new System.EventHandler(this.btnRandomize1_Click);
             // 
             // ucStartScreen
             // 
@@ -752,5 +780,7 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkTwo;
         private System.Windows.Forms.CheckBox checkOne;
+        private System.Windows.Forms.Button btnRandomize1;
+        private System.Windows.Forms.Button btnRandomize2;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace TiC__TaC__Toe
@@ -64,8 +65,7 @@ namespace TiC__TaC__Toe
             // Start the timer
             timer1.Enabled = true;
             // Disable clicking on a square
-            disableClick = true; ;
-            int attempts = 0;
+            disableClick = true;
             while (loadedField == null)
             {
                 // ChooseNextMove returns either a random field or a '~'
@@ -84,11 +84,6 @@ namespace TiC__TaC__Toe
                         loadedField = field;
                     }
                 }
-
-                // Stop the loop if a field has been succesfully loaded or there have been too many attempts.
-                attempts++;
-                if (attempts > 30)
-                    break;
             }
         }
 
@@ -100,8 +95,9 @@ namespace TiC__TaC__Toe
             // If there is a field loaded into memory then 'Click' on it and clear the memory
             if (loadedField != null)
             {
-                Field_Click(loadedField, EventArgs.Empty);
+                Label field = loadedField;
                 loadedField = null;
+                Field_Click(field, EventArgs.Empty);
             }
         }
 
@@ -163,36 +159,15 @@ namespace TiC__TaC__Toe
                 // Player One should try and get 3 corners first
                 // Player Two should get the middle option into a side option if player one has selected a corner
                 List<char> cornerList = new List<char> { '1', '3', '7', '9' };
+                List<char> uncornerList = new List<char> { '2', '4', '6', '8' };
                 if (CurrentPlayer == PlayerOne && move == '0')
                 {
-                    // Get a random available corner if there has been no move selected yet.
-                    // Check if there are still available corner squares
-                    if (!Funqtions.ContainsAllItems(unavailableSquares, cornerList))
-                    {
-                        IEnumerable<char> choiceList = Funqtions.GetRemainingItems(cornerList, unavailableSquares);
-                        // Pick a random available corner
-                        int index = random.Next(choiceList.Count());
-                        move = choiceList.ElementAt(index);
-                    }
+                    move = GetCPUPlayerOneMove(Directions, unavailableSquares, cornerList);
                 }
                 
                 else if (CurrentPlayer == PlayerTwo && move == '0')
                 {
-                    if (unavailableSquares.Except(cornerList) != unavailableSquares)
-                    {
-                        move = '5';
-                        if (unavailableSquares.Contains(move))
-                        {
-                            IEnumerable<char> uncornerList = availableSquares.Except(cornerList);
-                            int index = random.Next(uncornerList.Count());
-                            if (uncornerList.Count() > 0)
-                                move = uncornerList.ElementAt(index);
-                            else
-                                move = '0';
-                        }
-                        if (move != '0')
-                            break;
-                    }
+                    move = GetCPUPlayerTwoMove(unavailableSquares, availableSquares, Directions, cornerList, uncornerList);
                 }
 
                 // If there is no optimal play choose at random
@@ -212,6 +187,89 @@ namespace TiC__TaC__Toe
             if (field != null)
                 return field;
             return null;
+        }
+
+        private char GetCPUPlayerTwoMove(IEnumerable<char> unavailableSquares, IEnumerable<char> availableSquares, List<char[]> Directions, List<char> cornerList, List<char> uncornerList)
+        {
+            if (CurrentPlayer.takenSquares.Count == 0)
+            {
+                // if player one takes a corner choose the middle
+                // else take a corner
+                if (!PlayerOne.takenSquares.Contains('5'))
+                    return '5';
+                else
+                {
+                    int index = random.Next(cornerList.Count());
+                    return cornerList.ElementAt(index);
+                }
+            }
+            else if (CurrentPlayer.takenSquares.Count == 1)
+            {
+                // If I have the middle
+                if (CurrentPlayer.takenSquares.Contains('5'))
+                {
+                    // if player one has opposite edges go to a corner
+                    // if player one goes to one of the other edges block the corner
+                    // else go to the edge
+                    if (unavailableSquares.ContainsAllItems(NS) || unavailableSquares.ContainsAllItems(WE))
+                    {
+                        // get a random corner
+                        int index = random.Next(cornerList.Count());
+                        return cornerList.ElementAt(index);
+                    }
+
+                    else
+                    {
+                        // Block a corner
+                        // Get two lines which arent diagonal that have 1 filled square (always Player One)
+                        // Find the square that intersects them and select it
+                        char[] row1 = null;
+                        char[] row2 = null;
+                        foreach (char[] direction in Directions)
+                        {
+                            if (direction != SWNE && direction != NWSE && direction.Except(availableSquares).Count() == 1 && PlayerOne.takenSquares.Contains(direction[1]))
+                            {
+                                if (row1 == null)
+                                    row1 = direction;
+                                else
+                                    row2 = direction;
+                            }
+                        }
+                        // If both rows havent been filled and therefore player one has gone to a corner
+                        //  pick a random corner
+                        if (row1 != null && row2 != null)
+                            return row1.Intersect(row2).First();
+
+                        IEnumerable<char> choiceList = Funqtions.GetRemainingItems(uncornerList, unavailableSquares);
+                        // Pick a random available corner
+                        int index = random.Next(choiceList.Count());
+                        return choiceList.ElementAt(index);
+                    
+                    }
+
+                }
+            }
+            return '0';
+        }
+
+        private char GetCPUPlayerOneMove(List<char[]> Directions, IEnumerable<char> unavailableSquares, IEnumerable<char> cornerList)
+        {
+            // Get a random available corner if there has been no move selected yet.
+            // Check if there are still available corner squares
+            if (!Funqtions.ContainsAllItems(unavailableSquares, cornerList) && unavailableSquares.Count() < 6)
+            {
+                // Get a list of available corners
+                IEnumerable<char> choiceList = Funqtions.GetRemainingItems(cornerList, unavailableSquares);
+                // Remove the corners that are already blocked from the first corner by the other player
+                // If the square completes a row make a new list without it
+                foreach (var choice in choiceList)
+                    foreach (var direction in Directions)
+                        if (unavailableSquares.Append(choice).ContainsAllItems(direction) && direction.Contains(choice))
+                            choiceList = choiceList.Where(u => u != choice).ToList();
+                int index = random.Next(choiceList.Count());
+                return choiceList.ElementAt(index);
+            }
+            return '0';
         }
 
         public void UpdateLabels()
@@ -243,6 +301,9 @@ namespace TiC__TaC__Toe
         public void Restart(object sender, EventArgs e)
         {
             bool fieldEmpty = true;
+            timer1.Enabled = false;
+            disableClick = false;
+            loadedField = null;
             // Reset all squares back to default
             foreach (Label label in tableLayoutPanel1.Controls)
             {
