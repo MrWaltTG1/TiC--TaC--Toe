@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace TiC__TaC__Toe
@@ -168,7 +167,7 @@ namespace TiC__TaC__Toe
                 {
                     move = GetCPUPlayerOneMove(Directions, unavailableSquares, cornerList);
                 }
-                
+
                 else if (CurrentPlayer == PlayerTwo && move == '0')
                 {
                     move = GetCPUPlayerTwoMove(unavailableSquares, availableSquares, Directions, cornerList, uncornerList);
@@ -248,7 +247,7 @@ namespace TiC__TaC__Toe
                         // Pick a random available corner
                         int index = random.Next(choiceList.Count());
                         return choiceList.ElementAt(index);
-                    
+
                     }
 
                 }
@@ -325,7 +324,7 @@ namespace TiC__TaC__Toe
 
             // Reset the CurrentPlayer
             CurrentPlayer = null;
-            
+
             if (fieldEmpty)
                 PromptFullRestart();
             else
