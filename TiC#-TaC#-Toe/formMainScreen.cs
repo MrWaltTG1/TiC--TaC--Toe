@@ -68,22 +68,10 @@ namespace TiC__TaC__Toe
             disableClick = true;
             while (loadedField == null)
             {
-                // ChooseNextMove returns either a random field or a '~'
-                // '~' enables an optimal guess given from Hard CPU's
-                char fieldChar = CurrentPlayer.ChooseNextMove();
-                if (fieldChar == '~')
-                {
+                if (CurrentPlayer.CPU == 1)
+                    loadedField = DoRandomMove();
+                else if (CurrentPlayer.CPU == 2)
                     loadedField = DoHardMove();
-                }
-                else
-                {
-                    // Check whether the randomized char is able to be placed
-                    Label field = GetField(fieldChar);
-                    if (field.ForeColor == field.BackColor)
-                    {
-                        loadedField = field;
-                    }
-                }
             }
         }
 
@@ -110,6 +98,22 @@ namespace TiC__TaC__Toe
         char[] SWE = { '1', '2', '3' };
         char[] SWNE = { '1', '5', '9' };
         char[] NES = { '9', '6', '3' };
+
+        private Label DoRandomMove()
+        {
+            IEnumerable<char> availableSquares =
+                from Label label in tableLayoutPanel1.Controls
+                where label.Text == "_"
+                select label.Name.Last();
+            int index = random.Next(availableSquares.Count());
+            char move = availableSquares.ElementAt(index);
+
+            // Turn the char into a Label field and return that if possible
+            Label field = GetField(move);
+            if (field != null)
+                return field;
+            return null;
+        }
 
         private Label DoHardMove()
         {

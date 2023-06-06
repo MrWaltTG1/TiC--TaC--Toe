@@ -32,6 +32,7 @@
             this.lblPlayerOne = new System.Windows.Forms.Label();
             this.inputPlayer1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRandomize1 = new System.Windows.Forms.Button();
             this.checkOne = new System.Windows.Forms.CheckBox();
             this.lblExampleName1 = new System.Windows.Forms.Label();
             this.lblExampleSymbol1 = new System.Windows.Forms.Label();
@@ -51,9 +52,10 @@
             this.btnBlue1 = new System.Windows.Forms.PictureBox();
             this.btnRed1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPlayerTwo = new System.Windows.Forms.Label();
             this.inputPlayer2 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnRandomize2 = new System.Windows.Forms.Button();
             this.checkTwo = new System.Windows.Forms.CheckBox();
             this.lblExampleName2 = new System.Windows.Forms.Label();
             this.lblExampleSymbol2 = new System.Windows.Forms.Label();
@@ -75,8 +77,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnRandomize2 = new System.Windows.Forms.Button();
-            this.btnRandomize1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -112,19 +112,21 @@
             // 
             // lblPlayerOne
             // 
+            this.lblPlayerOne.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lblPlayerOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlayerOne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblPlayerOne.Location = new System.Drawing.Point(3, 0);
             this.lblPlayerOne.Name = "lblPlayerOne";
-            this.lblPlayerOne.Size = new System.Drawing.Size(221, 23);
+            this.lblPlayerOne.Size = new System.Drawing.Size(221, 25);
             this.lblPlayerOne.TabIndex = 1;
             this.lblPlayerOne.Text = "Player 1";
             this.lblPlayerOne.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPlayerOne.Click += new System.EventHandler(this.DifficultyLabel_Click);
             // 
             // inputPlayer1
             // 
             this.inputPlayer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputPlayer1.Location = new System.Drawing.Point(3, 26);
+            this.inputPlayer1.Location = new System.Drawing.Point(3, 28);
             this.inputPlayer1.Name = "inputPlayer1";
             this.inputPlayer1.Size = new System.Drawing.Size(221, 29);
             this.inputPlayer1.TabIndex = 3;
@@ -138,10 +140,21 @@
             this.panel1.Controls.Add(this.checkOne);
             this.panel1.Controls.Add(this.lblExampleName1);
             this.panel1.Controls.Add(this.lblExampleSymbol1);
-            this.panel1.Location = new System.Drawing.Point(3, 61);
+            this.panel1.Location = new System.Drawing.Point(3, 63);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(221, 172);
             this.panel1.TabIndex = 2;
+            // 
+            // btnRandomize1
+            // 
+            this.btnRandomize1.Location = new System.Drawing.Point(188, 140);
+            this.btnRandomize1.Name = "btnRandomize1";
+            this.btnRandomize1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnRandomize1.Size = new System.Drawing.Size(25, 25);
+            this.btnRandomize1.TabIndex = 8;
+            this.btnRandomize1.Text = "R";
+            this.btnRandomize1.UseVisualStyleBackColor = true;
+            this.btnRandomize1.Click += new System.EventHandler(this.btnRandomize1_Click);
             // 
             // checkOne
             // 
@@ -195,7 +208,7 @@
             this.panel2.Controls.Add(this.btnOrange1);
             this.panel2.Controls.Add(this.btnBlue1);
             this.panel2.Controls.Add(this.btnRed1);
-            this.panel2.Location = new System.Drawing.Point(3, 239);
+            this.panel2.Location = new System.Drawing.Point(3, 241);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(220, 66);
             this.panel2.TabIndex = 4;
@@ -370,7 +383,7 @@
             // 
             // flowLayoutPanel3
             // 
-            this.flowLayoutPanel3.Controls.Add(this.label1);
+            this.flowLayoutPanel3.Controls.Add(this.lblPlayerTwo);
             this.flowLayoutPanel3.Controls.Add(this.inputPlayer2);
             this.flowLayoutPanel3.Controls.Add(this.panel3);
             this.flowLayoutPanel3.Controls.Add(this.panel4);
@@ -381,21 +394,22 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(224, 305);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
-            // label1
+            // lblPlayerTwo
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Player 2";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPlayerTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerTwo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblPlayerTwo.Location = new System.Drawing.Point(3, 0);
+            this.lblPlayerTwo.Name = "lblPlayerTwo";
+            this.lblPlayerTwo.Size = new System.Drawing.Size(221, 25);
+            this.lblPlayerTwo.TabIndex = 1;
+            this.lblPlayerTwo.Text = "Player 2";
+            this.lblPlayerTwo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPlayerTwo.Click += new System.EventHandler(this.DifficultyLabel_Click);
             // 
             // inputPlayer2
             // 
             this.inputPlayer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputPlayer2.Location = new System.Drawing.Point(3, 26);
+            this.inputPlayer2.Location = new System.Drawing.Point(3, 28);
             this.inputPlayer2.Name = "inputPlayer2";
             this.inputPlayer2.Size = new System.Drawing.Size(221, 29);
             this.inputPlayer2.TabIndex = 3;
@@ -409,10 +423,21 @@
             this.panel3.Controls.Add(this.checkTwo);
             this.panel3.Controls.Add(this.lblExampleName2);
             this.panel3.Controls.Add(this.lblExampleSymbol2);
-            this.panel3.Location = new System.Drawing.Point(3, 61);
+            this.panel3.Location = new System.Drawing.Point(3, 63);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(221, 172);
             this.panel3.TabIndex = 2;
+            // 
+            // btnRandomize2
+            // 
+            this.btnRandomize2.Location = new System.Drawing.Point(189, 140);
+            this.btnRandomize2.Name = "btnRandomize2";
+            this.btnRandomize2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnRandomize2.Size = new System.Drawing.Size(25, 25);
+            this.btnRandomize2.TabIndex = 8;
+            this.btnRandomize2.Text = "R";
+            this.btnRandomize2.UseVisualStyleBackColor = true;
+            this.btnRandomize2.Click += new System.EventHandler(this.btnRandomize2_Click);
             // 
             // checkTwo
             // 
@@ -466,7 +491,7 @@
             this.panel4.Controls.Add(this.btnOrange2);
             this.panel4.Controls.Add(this.btnBlue2);
             this.panel4.Controls.Add(this.btnRed2);
-            this.panel4.Location = new System.Drawing.Point(3, 239);
+            this.panel4.Location = new System.Drawing.Point(3, 241);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(220, 66);
             this.panel4.TabIndex = 4;
@@ -642,7 +667,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 311);
+            this.checkBox1.Location = new System.Drawing.Point(3, 313);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(80, 17);
             this.checkBox1.TabIndex = 5;
@@ -652,7 +677,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(89, 311);
+            this.checkBox2.Location = new System.Drawing.Point(89, 313);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(80, 17);
             this.checkBox2.TabIndex = 6;
@@ -669,28 +694,6 @@
             this.button1.Text = "Confirm";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Confirm_Click);
-            // 
-            // btnRandomize2
-            // 
-            this.btnRandomize2.Location = new System.Drawing.Point(189, 140);
-            this.btnRandomize2.Name = "btnRandomize2";
-            this.btnRandomize2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnRandomize2.Size = new System.Drawing.Size(25, 25);
-            this.btnRandomize2.TabIndex = 8;
-            this.btnRandomize2.Text = "R";
-            this.btnRandomize2.UseVisualStyleBackColor = true;
-            this.btnRandomize2.Click += new System.EventHandler(this.btnRandomize2_Click);
-            // 
-            // btnRandomize1
-            // 
-            this.btnRandomize1.Location = new System.Drawing.Point(188, 140);
-            this.btnRandomize1.Name = "btnRandomize1";
-            this.btnRandomize1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnRandomize1.Size = new System.Drawing.Size(25, 25);
-            this.btnRandomize1.TabIndex = 8;
-            this.btnRandomize1.Text = "R";
-            this.btnRandomize1.UseVisualStyleBackColor = true;
-            this.btnRandomize1.Click += new System.EventHandler(this.btnRandomize1_Click);
             // 
             // ucStartScreen
             // 
@@ -755,7 +758,7 @@
         private System.Windows.Forms.PictureBox btnBlue1;
         private System.Windows.Forms.PictureBox btnRed1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPlayerTwo;
         private System.Windows.Forms.TextBox inputPlayer2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblExampleName2;

@@ -37,33 +37,12 @@ namespace TiC__TaC__Toe
 
         public void ToggleCPU(string difficulty = "off")
         {
-            if (difficulty == "Normal")
+            if (difficulty == "Standard")
                 CPU = 1;
-            else if (difficulty == "Hard")
+            else if (difficulty == "Impossible")
                 CPU = 2;
             else
                 CPU = 0;
-        }
-
-        public char ChooseNextMove()
-        {
-            if (CPU == 1)
-                return ChooseNextMoveNormal();
-            else if (CPU == 2)
-                return ChooseNextMoveHard();
-            else
-                return ' ';
-        }
-
-        private char ChooseNextMoveNormal()
-        {
-            char nextField = (char)(random.Next(1, 9) + '0');
-            return nextField;
-        }
-
-        private char ChooseNextMoveHard()
-        {
-            return '~';
         }
     }
 }

@@ -193,7 +193,7 @@ namespace TiC__TaC__Toe
         private void Confirm_Click(object sender, EventArgs e)
         {
             if (checkOne.Checked)
-                mainScreen.PlayerOne.ToggleCPU("Normal");
+                mainScreen.PlayerOne.ToggleCPU(lblPlayerOne.Text);
             else
                 mainScreen.PlayerOne.ToggleCPU("off");
             mainScreen.PlayerOne.name = lblExampleName1.Text;
@@ -201,7 +201,7 @@ namespace TiC__TaC__Toe
             mainScreen.PlayerOne.color = lblExampleSymbol1.ForeColor;
 
             if (checkTwo.Checked)
-                mainScreen.PlayerTwo.ToggleCPU("Normal");
+                mainScreen.PlayerTwo.ToggleCPU(lblPlayerTwo.Text);
             else
                 mainScreen.PlayerTwo.ToggleCPU("off");
             mainScreen.PlayerTwo.name = lblExampleName2.Text;
@@ -218,11 +218,39 @@ namespace TiC__TaC__Toe
         private void checkTwo_CheckedChanged(object sender, EventArgs e)
         {
             inputPlayer2_TextChanged(sender, e);
+            if (checkTwo.Checked)
+            {
+                lblPlayerTwo.BorderStyle = BorderStyle.FixedSingle;
+                lblPlayerTwo.BackColor = SystemColors.ControlLight;
+                lblPlayerTwo.Text = "Standard";
+                lblPlayerTwo.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                lblPlayerTwo.BorderStyle = BorderStyle.None;
+                lblPlayerTwo.BackColor = SystemColors.Control;
+                lblPlayerTwo.Text = "Player 2";
+                lblPlayerTwo.Cursor = Cursors.Default;
+            }
         }
 
         private void checkOne_CheckedChanged(object sender, EventArgs e)
         {
             inputPlayer1_TextChanged(sender, e);
+            if (checkOne.Checked)
+            {
+                lblPlayerOne.BorderStyle = BorderStyle.FixedSingle;
+                lblPlayerOne.BackColor = SystemColors.ControlLight;
+                lblPlayerOne.Text = "Standard";
+                lblPlayerOne.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                lblPlayerOne.BorderStyle = BorderStyle.None;
+                lblPlayerOne.BackColor = SystemColors.Control;
+                lblPlayerOne.Text = "Player 1";
+                lblPlayerOne.Cursor = Cursors.Default;
+            }
         }
 
         private void btnRandomize1_Click(object sender, EventArgs e)
@@ -253,6 +281,18 @@ namespace TiC__TaC__Toe
 
             ColorButton2_Click(color, e);
             SymbolButton2_Click(symbol, e);
+        }
+
+        private void DifficultyLabel_Click(object sender, EventArgs e)
+        {
+            Label clickedLabel = sender as Label;
+            if (clickedLabel != null)
+            {
+                if (clickedLabel.Text == "Standard")
+                    clickedLabel.Text = "Impossible";
+                else if (clickedLabel.Text == "Impossible")
+                    clickedLabel.Text = "Standard";
+            }
         }
     }
 }
