@@ -1,5 +1,5 @@
 <h1 align="center"> TiC#-TaC#-Toe </h1>
-<p align="center"><img src="doc/play screen 3.png"></p>
+<p align="center"><img src="doc/play screen 3.1.png"></p>
 
 <p align="center">A C# Windows Forms app to play Tic-Tac-Toe.</p>
 
@@ -13,7 +13,7 @@ A small application to play tic-tac-toe against another player on the same devic
 Download from the exe branch and run the TiC#-TaC#-Toe.exe file.
 
 ## Usage
-<img src="doc/start screen.png" height="300">
+<img src="doc/start screen.1.png" height="300">
 <p>
 On startup you can choose the names, symbols and colors of the two players playing. <br>
 🆕 Checking the CPU checkbox turns that player into a computer opponent. When a CPU is enabled pressing the grey button that appeared will switch between 'Standard' and 'Impossible' modes. 🆕 <br>
